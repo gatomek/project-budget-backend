@@ -1,0 +1,52 @@
+- name: "Setup Application Database"
+  gather_facts: no
+  vars_files:
+    - vars/prod.yml
+  hosts: castle
+  remote_user: gatomek
+  tasks:
+    - name: "Create database {{ db_name }}"
+      become_user: postgres
+      become: yes
+      postgresql_db:
+        state: present
+        name: "{{ db_name }}"
+        port: "{{ db_port }}"
+
+    - name: "Create db user {{ db_name }}"
+      become_user: postgres
+      become: yes
+      postgresql_user:
+        state: present
+        name: "{{ db_user }}"
+        password: "{{ db_password }}"
+        port: "{{ db_port }}"
+
+    - name: "Grant db user access to app db"
+      become_user: postgres
+      become: yes
+      postgresql_privs:
+        type: database
+        database: "{{ db_name }}"
+        roles: "{{ db_user }}"
+        grant_option: no
+        privs: all
+        port: "{{ db_port }}"
+
+    - name: "Allow external connection for the db user"
+      become: yes
+      become_user: postgres
+      postgresql_pg_hba:
+        dest: "/etc/postgresql/16/main/pg_hba.conf"
+        contype: host
+        databases: "{{ db_name }}"
+        method: scram-sha-256
+        users: "{{ db_user }}"
+        create: true
+        address: 0.0.0.0/0
+
+    - name: "Restart service postgresql"
+      become: yes
+      systemd:
+        name: postgresql
+        state: restarted

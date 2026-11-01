@@ -1,0 +1,7 @@
+services:
+  create-db:
+    container_name: ansible_create_db
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/create-db.yml
