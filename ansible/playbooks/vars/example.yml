@@ -1,0 +1,7 @@
+remote_admin:
+ansible_become_pass:
+
+db_port:
+db_user:
+db_name:
+db_password:
