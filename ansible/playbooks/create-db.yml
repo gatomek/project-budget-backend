@@ -22,15 +22,22 @@
         password: "{{ db_password }}"
         port: "{{ db_port }}"
 
-    - name: "Grant db user access to app db"
+    - name: "Create a new schema {{ db_name }} with a user {{ db_name }} who will own it"
       become_user: postgres
       become: yes
-      postgresql_privs:
-        type: database
+      community.postgresql.postgresql_schema:
         database: "{{ db_name }}"
-        roles: "{{ db_user }}"
-        grant_option: no
-        privs: all
+        name: "{{ db_name }}"
+        owner: "{{ db_user }}"
+        port: "{{ db_port }}"
+
+    - name: "Create a new schema liquibase with a user {{ db_name }} who will own it"
+      become_user: postgres
+      become: yes
+      community.postgresql.postgresql_schema:
+        database: "{{ db_name }}"
+        name: "liquibase"
+        owner: "{{ db_user }}"
         port: "{{ db_port }}"
 
     - name: "Allow external connection for the db user"
