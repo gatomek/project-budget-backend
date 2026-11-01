@@ -44,9 +44,11 @@
         users: "{{ db_user }}"
         create: true
         address: 0.0.0.0/0
+      register: pg_hba_result
 
-    - name: "Restart service postgresql"
+    - name: "Reload service postgresql when authentication rules change"
       become: yes
       systemd:
         name: postgresql
-        state: restarted
+        state: reloaded
+      when: pg_hba_result.changed
