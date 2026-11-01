@@ -1,7 +1,7 @@
 .idea/
 .mvn/
 target/
-src/
+out/
 
 backend.iml
 mvnw

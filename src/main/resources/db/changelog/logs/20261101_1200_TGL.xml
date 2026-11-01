@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="
+                    http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+>
+    <changeSet id="20261101_1200" author="TGL">
+
+        <createSequence schemaName="budget" sequenceName="receipt_id_seq" startValue="1" incrementBy="1"/>
+
+        <createTable schemaName="budget" tableName="receipt">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="price" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+            <column name="data" type="bytea">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
