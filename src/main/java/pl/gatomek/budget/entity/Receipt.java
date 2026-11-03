@@ -7,7 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -16,6 +19,9 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "RECEIPT", schema = "BUDGET")
 public class Receipt {
 
@@ -26,6 +32,9 @@ public class Receipt {
 
     @Column(name = "timestamp")
     private Instant timestamp;
+
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "price")
     private BigDecimal price;
