@@ -5,3 +5,9 @@ services:
       context: .
       dockerfile: ansible.Dockerfile
     command: ansible-playbook -i inventory.ini playbooks/create-db.yml
+  setup-app:
+    container_name: ansible_setup_app
+    build:
+      context: .
+      dockerfile: ansible.Dockerfile
+    command: ansible-playbook -i inventory.ini playbooks/setup-app.yml

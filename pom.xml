@@ -13,7 +13,7 @@
     <name>backend</name>
     <description>Budget Backend</description>
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -48,9 +48,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-liquibase</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>budget</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
