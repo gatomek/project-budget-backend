@@ -1,7 +1,7 @@
 - name: "Setup Application Database"
   gather_facts: no
   vars_files:
-    - vars/prod.yml
+    - vars/prod-db.yml
   hosts: castle
   remote_user: gatomek
   tasks:
