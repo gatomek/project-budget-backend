@@ -15,6 +15,9 @@
             <column name="timestamp" type="timestamp">
                 <constraints nullable="true"/>
             </column>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
             <column name="price" type="decimal">
                 <constraints nullable="true"/>
             </column>
