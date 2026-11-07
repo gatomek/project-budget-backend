@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.gatomek.budget.entity.Receipt;
 import pl.gatomek.budget.repo.ReceiptRepo;
-import pl.gatomek.budget.util.PngUtil;
 
-import java.io.IOException;
 import java.time.Instant;
 
 @RequiredArgsConstructor
@@ -15,12 +13,11 @@ public class ReceiptService {
 
     private final ReceiptRepo receiptRepo;
 
-    public void saveNewReceipt(String type, byte[] content) throws IOException {
-        byte[] reduced = PngUtil.reduce(content);
+    public void saveNewReceipt(String type, byte[] content) {
         Receipt receipt = Receipt.builder()
                 .timestamp(Instant.now())
                 .type(type)
-                .data(reduced)
+                .data(content)
                 .build();
 
         receiptRepo.save(receipt);
